@@ -37,6 +37,9 @@ McpCAD is built on the shoulders of giants:
 
 ## ❓ F.A.Q.
 
+**Q: It's not installing, or it's taking forever to start.**  
+**A:** The extension automatically prepares a Python environment and installs CadQuery on the first run. This process can take several minutes. Occasionally, a second restart is required for all components to sync. If the MCP server doesn't appear, please restart VS Code, re-open the McpCAD Viewport, and refresh your MCP tools.
+
 **Q: My AI agent says it can't "see" or render the model.**  
 **A:** Ensure the McpCAD Viewport is open in VS Code (Run the `McpCAD Viewer` command). The agent interacts with the live viewport to capture screenshots and metadata.
 

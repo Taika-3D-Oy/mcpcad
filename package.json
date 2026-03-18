@@ -1,0 +1,83 @@
+{
+  "name": "mcpcad",
+  "displayName": "McpCAD: AI-Powered CAD Modeler",
+  "description": "AI-native 3D modeling for VS Code: An MCP-powered CAD system using Open CASCADE (OCCT) to let agents see, debug, and build geometry",
+  "version": "1.0.3",
+  "license": "Apache-2.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "publisher": "taika3d",
+  "author": {
+    "name": "Taika3D Oy",
+    "url": "https://taika3d.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Taika-3D-Oy/mcpcad.git"
+  },
+  "icon": "resources/extension-icon.png",
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mcpcad-explorer",
+          "title": "McpCAD",
+          "icon": "resources/activity-bar-icon.png"
+        }
+      ]
+    },
+    "views": {
+      "mcpcad-explorer": [
+        {
+          "id": "mcpCadView",
+          "name": "Viewport",
+          "type": "webview",
+          "icon": "resources/activity-bar-icon.png"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "mcpcad.customViewer",
+        "title": "McpCAD Viewer"
+      }
+    ],
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "mcpcad-mcp",
+        "label": "McpCAD Server"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile-all",
+    "compile-all": "npm run bundle-extension && npm run bundle-webview",
+    "bundle-extension": "npx esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --minify --target=node18",
+    "bundle-webview": "npx esbuild src/webview/viewer.ts --bundle --outfile=out/viewer.js --minify --target=chrome91 --format=iife",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile-all && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/three": "^0.183.1",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.4",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "latest",
+    "@types/express": "^4.17.21",
+    "axios": "^1.13.6",
+    "express": "^4.19.2",
+    "tar": "^7.5.11",
+    "three": "^0.183.2"
+  }
+}
